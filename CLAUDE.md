@@ -51,4 +51,4 @@ me get better at directing an agent:
 
 ## Constraints
 - Public German website → **Impressum + Datenschutzerklärung are mandatory.**
-- Domain `kirchheim-harmonists.com`; DNS already on Cloudflare.
+- Domain `kirchheim-harmonists.de`; DNS already on Cloudflare.

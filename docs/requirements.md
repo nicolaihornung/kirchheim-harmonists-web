@@ -7,12 +7,12 @@ prefer clarity and small, verifiable steps over cleverness.
 ## Goals
 - A simple, fast, low-maintenance website describing the choir, with an
   upcoming-events section and a way to get in contact.
-- Email forwarding for `info@kirchheim-harmonists.com` to several personal inboxes.
+- Email forwarding for `info@kirchheim-harmonists.de` to several personal inboxes.
 - All infrastructure defined in Terraform.
 - Everything within Cloudflare's free tiers wherever at all possible.
 
 ## Context & constraints
-- Domain: `kirchheim-harmonists.com` (bought via Namecheap; DNS already delegated to
+- Domain: `kirchheim-harmonists.de` (bought via Namecheap; DNS already delegated to
   Cloudflare).
 - Public-facing **German** website → an **Impressum** and a **Datenschutzerklärung**
   are legally required, and any personal-data handling must follow GDPR (data

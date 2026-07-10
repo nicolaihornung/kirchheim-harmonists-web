@@ -20,7 +20,7 @@ TypeScript throughout.
 
 ## Pages (Phase 1)
 Home / about the choir · Upcoming events · Contact (display
-`info@kirchheim-harmonists.com`) · Impressum · Datenschutzerklärung.
+`info@kirchheim-harmonists.de`) · Impressum · Datenschutzerklärung.
 
 ## Non-negotiables
 - Impressum + Datenschutzerklärung present and linked in the footer.

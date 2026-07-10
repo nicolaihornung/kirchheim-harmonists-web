@@ -1,6 +1,6 @@
 # infra/ — Terraform (Cloudflare)
 
-Manages all Cloudflare infrastructure for `kirchheim-harmonists.com`.
+Manages all Cloudflare infrastructure for `kirchheim-harmonists.de`.
 
 ## Provider & docs — verify BEFORE writing resources
 - Provider: `cloudflare/cloudflare`, pinned `~> 5`. **v5 is a ground-up,
