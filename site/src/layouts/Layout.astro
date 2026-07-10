@@ -1,0 +1,157 @@
+---
+import '@fontsource-variable/fraunces/index.css';
+import '@fontsource-variable/inter/index.css';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = 'Kirchheim Harmonists — Chor in Kirchheim.' } = Astro.props;
+
+const year = new Date().getFullYear();
+---
+
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+
+		<title>{title} · Kirchheim Harmonists</title>
+		<meta name="description" content={description} />
+
+		<meta property="og:title" content={`${title} · Kirchheim Harmonists`} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="de_DE" />
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+		<header class="site-header">
+			<div class="container site-header__inner">
+				<a class="wordmark" href="/">
+					<span class="wordmark__line">KIRCHHEIM</span>
+					<span class="wordmark__line">HARMON<span aria-hidden="true">♪</span><span class="visually-hidden">I</span>STS</span>
+				</a>
+			</div>
+		</header>
+
+		<main id="main">
+			<slot />
+		</main>
+
+		<footer class="site-footer">
+			<div class="container site-footer__inner">
+				<p class="site-footer__name">Kirchheim Harmonists</p>
+				<nav class="site-footer__nav" aria-label="Rechtliches und Kontakt">
+					<ul>
+						<li><a href="/impressum">Impressum</a></li>
+						<li><a href="/datenschutz">Datenschutz</a></li>
+						<li><a href="mailto:info@kirchheim-harmonists.de">Kontakt</a></li>
+					</ul>
+				</nav>
+				<p class="site-footer__copyright">&copy; {year} Kirchheim Harmonists</p>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style>
+	.skip-link {
+		position: absolute;
+		top: -3rem;
+		left: var(--space-s);
+		z-index: 100;
+		background: var(--color-paper);
+		color: var(--color-ink);
+		padding: var(--space-2xs) var(--space-s);
+		border: 1px solid var(--color-hairline);
+		border-radius: 4px;
+		text-decoration: none;
+		transition: top 0.15s ease;
+	}
+
+	.skip-link:focus {
+		top: var(--space-s);
+	}
+
+	.site-header {
+		border-bottom: 1px solid var(--color-hairline);
+	}
+
+	.site-header__inner {
+		padding-block: var(--space-m);
+	}
+
+	.wordmark {
+		display: inline-flex;
+		flex-direction: column;
+		gap: 0.1em;
+		font-family: var(--font-display);
+		text-decoration: none;
+		line-height: 1;
+		color: var(--color-ink);
+	}
+
+	.wordmark:hover {
+		color: var(--color-accent);
+	}
+
+	.wordmark__line {
+		font-weight: 600;
+		font-size: var(--step-1);
+		letter-spacing: 0.06em;
+	}
+
+	.wordmark__line:last-child {
+		color: var(--color-accent);
+	}
+
+	.site-footer {
+		border-top: 1px solid var(--color-hairline);
+		margin-top: var(--space-3xl);
+	}
+
+	.site-footer__inner {
+		padding-block: var(--space-l);
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-m);
+		color: var(--color-muted);
+		font-size: var(--step--1);
+	}
+
+	.site-footer__name {
+		font-family: var(--font-display);
+		font-weight: 600;
+		color: var(--color-ink);
+		max-width: none;
+	}
+
+	.site-footer__nav ul {
+		display: flex;
+		gap: var(--space-m);
+		flex-wrap: wrap;
+	}
+
+	.site-footer__copyright {
+		width: 100%;
+		max-width: none;
+		order: 3;
+		font-size: var(--step--1);
+	}
+
+	@media (min-width: 40rem) {
+		.site-footer__copyright {
+			width: auto;
+			order: 0;
+		}
+	}
+</style>

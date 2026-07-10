@@ -1,17 +1,89 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+	title="Startseite"
+	description="Die Kirchheim Harmonists sind ein Chor aus Kirchheim. Erfahren Sie mehr über unsere Geschichte, unser Repertoire und wie Sie uns erreichen."
+>
+	<section class="hero">
+		<div class="container hero__inner">
+			<!-- PLACEHOLDER: real copy to come -->
+			<p class="eyebrow">Chorgesang in Kirchheim</p>
+			<h1 class="hero__headline">Kirchheim Harmonists</h1>
+			<p class="hero__intro">
+				Wir sind ein gemischter Chor, der Menschen mit Freude am gemeinsamen Singen
+				zusammenbringt &mdash; von klassischen Chorsätzen bis zu zeitgenössischen
+				Arrangements.
+			</p>
+			<a class="hero__cta" href="mailto:info@kirchheim-harmonists.de">Kontakt aufnehmen</a>
+		</div>
+	</section>
+
+	<section class="about">
+		<div class="container">
+			<h2>Über uns</h2>
+			<!-- PLACEHOLDER: real copy to come -->
+			<p>
+				Die Kirchheim Harmonists wurden von einer kleinen Gruppe sangesfreudiger
+				Nachbarinnen und Nachbarn gegründet, die sich regelmäßig zum gemeinsamen Singen
+				trafen. Aus diesen zwanglosen Treffen ist über die Jahre ein fester Chor
+				geworden, der die musikalische Landschaft der Gemeinde bereichert.
+			</p>
+			<p>
+				Unser Repertoire reicht von mehrstimmigen Volksliedern über geistliche Chormusik
+				bis hin zu Arrangements aus Pop und Jazz. Wir legen Wert auf einen warmen,
+				ausgewogenen Klang und darauf, dass jede Stimme &mdash; ob erfahren oder neu im
+				Chorgesang &mdash; ihren Platz findet.
+			</p>
+			<p>
+				Geprobt wird wöchentlich am Abend in den Räumen der Gemeinde. Neue Sängerinnen
+				und Sänger aller Stimmlagen sind jederzeit herzlich willkommen, bei einer
+				Probe hereinzuschnuppern.
+			</p>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		padding-block: var(--space-3xl) var(--space-2xl);
+	}
+
+	.hero__inner {
+		max-width: 42rem;
+	}
+
+	.hero__headline {
+		margin-top: var(--space-s);
+		margin-bottom: var(--space-m);
+	}
+
+	.hero__intro {
+		color: var(--color-ink);
+		font-size: var(--step-1);
+		margin-bottom: var(--space-l);
+	}
+
+	.hero__cta {
+		display: inline-block;
+		font-weight: 600;
+	}
+
+	.about {
+		padding-block: var(--space-2xl);
+		border-top: 1px solid var(--color-hairline);
+	}
+
+	.about h2 {
+		margin-bottom: var(--space-l);
+	}
+
+	.about p {
+		margin-bottom: var(--space-m);
+	}
+
+	.about p:last-child {
+		margin-bottom: 0;
+	}
+</style>
