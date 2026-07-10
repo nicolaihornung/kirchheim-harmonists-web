@@ -1,0 +1,14 @@
+{
+	// Deploy the static Astro build to Cloudflare Workers (Static Assets).
+	// No `main` / Worker code — assets are served directly (free & unlimited).
+	// wrangler/CI owns this Worker AND its custom domains (see infra/CLAUDE.md, Option A).
+	"name": "kirchheim-harmonists-site",
+	"compatibility_date": "2026-07-11",
+	"assets": {
+		"directory": "./dist"
+	},
+	"routes": [
+		{ "pattern": "kirchheim-harmonists.de", "custom_domain": true },
+		{ "pattern": "www.kirchheim-harmonists.de", "custom_domain": true }
+	]
+}
