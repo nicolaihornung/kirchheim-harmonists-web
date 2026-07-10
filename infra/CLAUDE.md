@@ -28,13 +28,13 @@ Manages all Cloudflare infrastructure for `kirchheim-harmonists.com`.
 - DNS records for the site and email routing.
 - Email Routing: settings, destination addresses, and the rule pointing `info@` at the
   fan-out Worker (the `cloudflare_email_routing_*` family — verify exact names/args).
-- The Pages project for the site.
+- The Worker (custom domain / route) serving the site's static assets.
 - Optionally the Email Worker script itself — but see the boundary note below.
 
 ## IaC/app boundary
-- **Terraform owns:** DNS, Email Routing settings/addresses/rules, the Pages *project*,
-  R2 state-bucket config, API-token-scoped configuration.
-- **wrangler/build owns:** the site build deployed to Pages, and the Email Worker
+- **Terraform owns:** DNS, Email Routing settings/addresses/rules, the Worker's custom
+  domain / route for the site, R2 state-bucket config, API-token-scoped configuration.
+- **wrangler/build owns:** the site build deployed to the Worker, and the Email Worker
   *code*.
 - **Grey area:** the fan-out Worker is tiny. Deploying its code via `wrangler` and
   having TF only wire the routing rule keeps the boundary clean; managing it via a

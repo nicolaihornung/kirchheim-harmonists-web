@@ -1,6 +1,7 @@
 # site/ — Astro + Svelte content site
 
-Static-first site for the choir, deployed to Cloudflare Pages. TypeScript throughout.
+Static-first site for the choir, deployed to Cloudflare Workers (static assets).
+TypeScript throughout.
 
 ## Stack
 - **Astro** (Vite-based). Scaffold with the official tooling — don't hand-write

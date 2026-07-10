@@ -23,7 +23,7 @@ prefer clarity and small, verifiable steps over cleverness.
 ## Architecture (target)
 - **DNS:** Cloudflare (done).
 - **Website:** static Astro site (Svelte available for future interactive islands) →
-  Cloudflare Pages.
+  Cloudflare Workers with Static Assets.
 - **Email in:** Cloudflare Email Routing forwards `info@` → a small Email Worker →
   multiple verified personal inboxes.
 - **Infra:** Terraform, Cloudflare provider v5, state in Cloudflare R2 (`s3` backend
@@ -65,7 +65,8 @@ prefer clarity and small, verifiable steps over cleverness.
 **Non-goals (Phase 1):** contact form, subscribe form, newsletter, any login/admin,
 any server-side rendering.
 
-**Deploy:** Cloudflare Pages, built by wrangler/CI — *not* by Terraform.
+**Deploy:** Cloudflare Workers with Static Assets, deployed by wrangler/CI — *not* by
+Terraform.
 
 ## Sub-project B — The Terraform IaC
 
@@ -75,8 +76,8 @@ any server-side rendering.
 - **State backend:** Cloudflare R2 via the `s3` backend with `use_lockfile = true`
   (Terraform ≥ 1.10; no DynamoDB). Bootstrap bucket + token created once by hand.
 - **Manages:** DNS records; Email Routing settings, verified destination addresses,
-  and the routing rule sending `info@` to the fan-out Worker; the Pages project; the
-  state-bucket config.
+  and the routing rule sending `info@` to the fan-out Worker; the Worker's custom
+  domain / route for the site; the state-bucket config.
 - **IaC/app boundary:** Terraform owns *infrastructure that exists*; wrangler/build
   owns *code that deploys* (the site, and the Email Worker's code). The fan-out Worker
   is a small grey area — decide at build time whether TF or wrangler owns the script,
@@ -103,6 +104,10 @@ any server-side rendering.
 - **Astro + Svelte islands** — best fit for a content-heavy, static site; near-zero JS;
   content collections suit git-managed events; Svelte is on hand for Phase 2
   interactivity. TypeScript throughout.
+- **Deploy via Workers with Static Assets** (not Pages) — Cloudflare's recommended
+  path for new projects; static-asset requests are free and unlimited; SSR can be
+  added to the same Worker in Phase 2 with no platform migration; avoids the now
+  feature-frozen Pages platform.
 - **Events as git files, not a CMS** — simplest, free, no auth or attack surface.
 - **Contact = displayed `info@`** (not a form) in Phase 1 — keeps Phase 1 free of any
   send path or server code.
@@ -117,4 +122,3 @@ any server-side rendering.
 - Impressum details (responsible party for the choir / Verein) and Datenschutzerklärung
   content.
 - Branding: colours, logo, tone.
-- Pages vs Workers with Static Assets
