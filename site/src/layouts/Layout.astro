@@ -38,6 +38,11 @@ const year = new Date().getFullYear();
 					<span class="wordmark__line">KIRCHHEIM</span>
 					<span class="wordmark__line">HARMON<span aria-hidden="true">♪</span><span class="visually-hidden">I</span>STS</span>
 				</a>
+				<nav class="site-header__nav" aria-label="Hauptnavigation">
+					<ul>
+						<li><a href="/konzerte">Konzerte</a></li>
+					</ul>
+				</nav>
 			</div>
 		</header>
 
@@ -86,6 +91,27 @@ const year = new Date().getFullYear();
 
 	.site-header__inner {
 		padding-block: var(--space-m);
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-m);
+	}
+
+	.site-header__nav ul {
+		display: flex;
+		gap: var(--space-m);
+	}
+
+	.site-header__nav a {
+		font-family: var(--font-sans);
+		font-weight: 600;
+		text-decoration: none;
+		color: var(--color-ink);
+	}
+
+	.site-header__nav a:hover {
+		color: var(--color-accent);
 	}
 
 	.wordmark {

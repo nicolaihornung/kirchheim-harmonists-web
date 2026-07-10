@@ -1,0 +1,208 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+const events = await getCollection('events');
+
+const now = new Date();
+
+const upcoming = events
+	.filter((entry) => entry.data.date >= now)
+	.sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+
+const past = events
+	.filter((entry) => entry.data.date < now)
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const dateFormatter = new Intl.DateTimeFormat('de-DE', {
+	weekday: 'long',
+	day: 'numeric',
+	month: 'long',
+	year: 'numeric',
+});
+
+const upcomingRendered = await Promise.all(
+	upcoming.map(async (entry) => ({ entry, Content: (await render(entry)).Content })),
+);
+const pastRendered = await Promise.all(
+	past.map(async (entry) => ({ entry, Content: (await render(entry)).Content })),
+);
+---
+
+<Layout
+	title="Konzerte"
+	description="Kommende und vergangene Konzerte der Kirchheim Harmonists."
+>
+	<section class="page-intro">
+		<div class="container">
+			<p class="eyebrow">Termine</p>
+			<h1>Konzerte</h1>
+		</div>
+	</section>
+
+	<section class="events-section">
+		<div class="container">
+			<h2>Kommende Konzerte</h2>
+			{
+				upcomingRendered.length > 0 ? (
+					<ol class="event-list">
+						{upcomingRendered.map(({ entry, Content }) => (
+							<li>
+								<article class="event-card">
+									<p class="event-card__date">
+										<time datetime={entry.data.date.toISOString().slice(0, 10)}>
+											{dateFormatter.format(entry.data.date)}
+										</time>
+									</p>
+									<h3 class="event-card__title">{entry.data.title}</h3>
+									<p class="event-card__venue">
+										{entry.data.venue}, {entry.data.city}
+									</p>
+									<p class="event-card__meta">
+										{entry.data.receptionTime && (
+											<>Sektempfang {entry.data.receptionTime} Uhr &middot; </>
+										)}
+										Konzertbeginn {entry.data.startTime} Uhr
+									</p>
+									{entry.data.guests && (
+										<p class="event-card__guests">mit {entry.data.guests}</p>
+									)}
+									<p class="event-card__admission">{entry.data.admission}</p>
+									<div class="event-card__note">
+										<Content />
+									</div>
+								</article>
+							</li>
+						))}
+					</ol>
+				) : (
+					<p class="no-events">
+						Aktuell sind keine Termine geplant &ndash; neue Konzerte folgen in Kürze.
+					</p>
+				)
+			}
+		</div>
+	</section>
+
+	<section class="events-section events-section--past">
+		<div class="container">
+			<h2>Vergangene Konzerte</h2>
+			{
+				pastRendered.length > 0 ? (
+					<ol class="event-list event-list--past">
+						{pastRendered.map(({ entry, Content }) => (
+							<li>
+								<article class="event-card event-card--past">
+									<p class="event-card__date">
+										<time datetime={entry.data.date.toISOString().slice(0, 10)}>
+											{dateFormatter.format(entry.data.date)}
+										</time>
+									</p>
+									<h3 class="event-card__title">{entry.data.title}</h3>
+									<p class="event-card__venue">
+										{entry.data.venue}, {entry.data.city}
+									</p>
+									<p class="event-card__meta">
+										{entry.data.receptionTime && (
+											<>Sektempfang {entry.data.receptionTime} Uhr &middot; </>
+										)}
+										Konzertbeginn {entry.data.startTime} Uhr
+									</p>
+									{entry.data.guests && (
+										<p class="event-card__guests">mit {entry.data.guests}</p>
+									)}
+									<p class="event-card__admission">{entry.data.admission}</p>
+									<div class="event-card__note">
+										<Content />
+									</div>
+								</article>
+							</li>
+						))}
+					</ol>
+				) : (
+					<p class="no-events">Noch keine vergangenen Konzerte.</p>
+				)
+			}
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.page-intro {
+		padding-block: var(--space-2xl) var(--space-l);
+	}
+
+	.page-intro h1 {
+		margin-top: var(--space-s);
+	}
+
+	.events-section {
+		padding-block: var(--space-2xl);
+		border-top: 1px solid var(--color-hairline);
+	}
+
+	.events-section h2 {
+		margin-bottom: var(--space-l);
+	}
+
+	.no-events {
+		color: var(--color-muted);
+	}
+
+	.event-list {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-l);
+	}
+
+	.event-card {
+		padding-block: var(--space-m);
+		border-top: 1px solid var(--color-hairline);
+	}
+
+	.event-list > li:first-child .event-card {
+		border-top: none;
+		padding-top: 0;
+	}
+
+	.event-card__date {
+		font-family: var(--font-sans);
+		font-size: var(--step--1);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--color-accent);
+		margin-bottom: var(--space-2xs);
+	}
+
+	.event-card--past .event-card__date {
+		color: var(--color-muted);
+	}
+
+	.event-card__title {
+		margin-bottom: var(--space-2xs);
+	}
+
+	.event-card__venue {
+		color: var(--color-ink);
+		margin-bottom: var(--space-3xs);
+	}
+
+	.event-card__meta,
+	.event-card__guests,
+	.event-card__admission {
+		color: var(--color-muted);
+		font-size: var(--step--1);
+		margin-bottom: var(--space-3xs);
+	}
+
+	.event-card__note {
+		margin-top: var(--space-s);
+		max-width: var(--measure);
+	}
+
+	.event-card__note :global(p) {
+		color: var(--color-muted);
+		font-size: var(--step--1);
+	}
+</style>
