@@ -1,0 +1,7 @@
+{
+	// Email Routing invokes this Worker directly — no routes, no custom domain,
+	// no bindings needed. Recipients come from the FORWARD_TO secret (see README.md).
+	"name": "kirchheim-harmonists-email-router",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-07-11"
+}

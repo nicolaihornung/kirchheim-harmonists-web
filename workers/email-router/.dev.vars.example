@@ -1,0 +1,6 @@
+# Copy to .dev.vars for local development (that file is git-ignored, never commit it).
+# Comma-separated list of verified inboxes info@ should fan out to.
+FORWARD_TO="alice@example.com,bob@example.com"
+
+# In production, this value is NOT set here — it's a runtime secret:
+#   wrangler secret put FORWARD_TO

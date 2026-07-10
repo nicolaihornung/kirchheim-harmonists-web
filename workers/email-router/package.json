@@ -1,0 +1,14 @@
+{
+  "name": "kirchheim-harmonists-email-router",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260710.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.110.0"
+  }
+}

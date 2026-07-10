@@ -1,0 +1,3 @@
+zone_id            = "<your zone id>"
+account_id         = "<your account id>"
+forward_recipients = ["nicolai@example.com", "conductor@example.com"]

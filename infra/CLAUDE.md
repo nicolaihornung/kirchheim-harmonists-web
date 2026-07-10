@@ -41,10 +41,13 @@ Manages all Cloudflare infrastructure for `kirchheim-harmonists.de`.
 - **Decision (site domain): Option A.** The site's custom domain is deploy-coupled, so
   wrangler owns it; Cloudflare then auto-manages the apex DNS record for that domain.
   Terraform therefore does *not* manage the site route.
-- **Grey area:** the fan-out Worker is tiny. Deploying its code via `wrangler` and
-  having TF only wire the routing rule keeps the boundary clean; managing it via a
-  `cloudflare_workers_script` resource is defensible for one small script. Decide at
-  build time and record the choice here.
+- **Grey area — decided (I3):** the fan-out Worker's *code* is deployed via
+  `wrangler`/CI (`.github/workflows/deploy-email-worker.yml`, mirroring the site
+  deploy workflow), **not** a `cloudflare_workers_script` resource. Terraform only
+  wires the `cloudflare_email_routing_rule` to it **by name**
+  (`var.email_worker_name`, see `infra/email.tf`). This keeps the same boundary as the
+  site Worker and means the Worker must be deployed once (so a Worker with that name
+  exists) *before* the Terraform rule is applied — see `workers/email-router/README.md`.
 
 ## Human-in-the-loop (Terraform CANNOT do these)
 - Each email destination address must be verified by its owner clicking a link; rules
