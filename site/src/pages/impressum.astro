@@ -6,10 +6,26 @@ import Layout from '../layouts/Layout.astro';
 	<section class="legal">
 		<div class="container">
 			<h1>Impressum</h1>
-			<!-- PLACEHOLDER: real legal details (Anbieterkennzeichnung nach § 5 TMG) to come -->
+
+			<h2>Angaben gemäß § 5 DDG</h2>
 			<p>
-				Die vollständigen Angaben gemäß § 5 Telemediengesetz (TMG) werden hier in Kürze
-				ergänzt.
+				Nicolai Hornung<br />
+				Hauptstraße 45c<br />
+				85551 Kirchheim bei München
+			</p>
+
+			<h2>Kontakt</h2>
+			<!-- Optional: Telefonnummer kann bei Bedarf hier ergänzt werden. -->
+			<p>
+				E-Mail: <a href="mailto:info@kirchheim-harmonists.de"
+					>info@kirchheim-harmonists.de</a
+				>
+			</p>
+
+			<h2>Inhaltlich verantwortlich gemäß § 18 Abs. 2 MStV</h2>
+			<p>
+				Nicolai Hornung<br />
+				Anschrift wie oben
 			</p>
 		</div>
 	</section>
@@ -20,7 +36,17 @@ import Layout from '../layouts/Layout.astro';
 		padding-block: var(--space-2xl);
 	}
 
+	.legal .container {
+		max-width: var(--measure);
+	}
+
 	.legal h1 {
 		margin-bottom: var(--space-l);
+	}
+
+	.legal h2 {
+		font-size: var(--step-1);
+		margin-top: var(--space-l);
+		margin-bottom: var(--space-2xs);
 	}
 </style>
