@@ -5,7 +5,11 @@ receptionTime: "18:00"
 startTime: "18:45"
 venue: "Pfarrsaal St. Peter und Paul"
 city: "Aschheim"
-guests: "TUNE It"
+ensembles:
+  - name: "Kirchheim Harmonists"
+    logo: "/ensembles/kirchheim-harmonists.svg"
+  - name: "TUNE It"
+    logo: "/ensembles/tune-it.svg"
 admission: "Eintritt frei"
 ---
 

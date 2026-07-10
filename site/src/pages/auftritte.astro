@@ -30,19 +30,19 @@ const pastRendered = await Promise.all(
 ---
 
 <Layout
-	title="Konzerte"
-	description="Kommende und vergangene Konzerte der Kirchheim Harmonists."
+	title="Auftritte"
+	description="Kommende und vergangene Auftritte der Kirchheim Harmonists."
 >
 	<section class="page-intro">
 		<div class="container">
 			<p class="eyebrow">Termine</p>
-			<h1>Konzerte</h1>
+			<h1>Auftritte</h1>
 		</div>
 	</section>
 
 	<section class="events-section">
 		<div class="container">
-			<h2>Kommende Konzerte</h2>
+			<h2>Kommende Auftritte</h2>
 			{
 				upcomingRendered.length > 0 ? (
 					<ol class="event-list">
@@ -64,8 +64,30 @@ const pastRendered = await Promise.all(
 										)}
 										Konzertbeginn {entry.data.startTime} Uhr
 									</p>
-									{entry.data.guests && (
-										<p class="event-card__guests">mit {entry.data.guests}</p>
+									{entry.data.ensembles.length > 0 && (
+										<div class="event-card__ensembles">
+											<p class="event-card__ensembles-label eyebrow">Mitwirkende</p>
+											<ul class="ensemble-list">
+												{entry.data.ensembles.map((ensemble) => (
+													<li>
+														{ensemble.logo ? (
+															<figure class="ensemble">
+																<img
+																	src={ensemble.logo}
+																	alt=""
+																	width="120"
+																	height="60"
+																	class="ensemble__logo"
+																/>
+																<figcaption class="ensemble__name">{ensemble.name}</figcaption>
+															</figure>
+														) : (
+															<span class="ensemble-chip">{ensemble.name}</span>
+														)}
+													</li>
+												))}
+											</ul>
+										</div>
 									)}
 									<p class="event-card__admission">{entry.data.admission}</p>
 									<div class="event-card__note">
@@ -77,7 +99,7 @@ const pastRendered = await Promise.all(
 					</ol>
 				) : (
 					<p class="no-events">
-						Aktuell sind keine Termine geplant &ndash; neue Konzerte folgen in Kürze.
+						Aktuell sind keine Termine geplant &ndash; neue Auftritte folgen in Kürze.
 					</p>
 				)
 			}
@@ -86,7 +108,7 @@ const pastRendered = await Promise.all(
 
 	<section class="events-section events-section--past">
 		<div class="container">
-			<h2>Vergangene Konzerte</h2>
+			<h2>Vergangene Auftritte</h2>
 			{
 				pastRendered.length > 0 ? (
 					<ol class="event-list event-list--past">
@@ -108,8 +130,30 @@ const pastRendered = await Promise.all(
 										)}
 										Konzertbeginn {entry.data.startTime} Uhr
 									</p>
-									{entry.data.guests && (
-										<p class="event-card__guests">mit {entry.data.guests}</p>
+									{entry.data.ensembles.length > 0 && (
+										<div class="event-card__ensembles">
+											<p class="event-card__ensembles-label eyebrow">Mitwirkende</p>
+											<ul class="ensemble-list">
+												{entry.data.ensembles.map((ensemble) => (
+													<li>
+														{ensemble.logo ? (
+															<figure class="ensemble">
+																<img
+																	src={ensemble.logo}
+																	alt=""
+																	width="120"
+																	height="60"
+																	class="ensemble__logo"
+																/>
+																<figcaption class="ensemble__name">{ensemble.name}</figcaption>
+															</figure>
+														) : (
+															<span class="ensemble-chip">{ensemble.name}</span>
+														)}
+													</li>
+												))}
+											</ul>
+										</div>
 									)}
 									<p class="event-card__admission">{entry.data.admission}</p>
 									<div class="event-card__note">
@@ -120,7 +164,7 @@ const pastRendered = await Promise.all(
 						))}
 					</ol>
 				) : (
-					<p class="no-events">Noch keine vergangenen Konzerte.</p>
+					<p class="no-events">Noch keine vergangenen Auftritte.</p>
 				)
 			}
 		</div>
@@ -189,11 +233,52 @@ const pastRendered = await Promise.all(
 	}
 
 	.event-card__meta,
-	.event-card__guests,
 	.event-card__admission {
 		color: var(--color-muted);
 		font-size: var(--step--1);
 		margin-bottom: var(--space-3xs);
+	}
+
+	.event-card__ensembles {
+		margin-block: var(--space-s) var(--space-2xs);
+	}
+
+	.event-card__ensembles-label {
+		display: block;
+		margin-bottom: var(--space-2xs);
+	}
+
+	.ensemble-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-m);
+	}
+
+	.ensemble {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--space-3xs);
+	}
+
+	.ensemble__logo {
+		max-height: 48px;
+		width: auto;
+	}
+
+	.ensemble__name {
+		font-size: var(--step--1);
+		color: var(--color-muted);
+	}
+
+	.ensemble-chip {
+		display: inline-flex;
+		align-items: center;
+		padding: var(--space-3xs) var(--space-xs);
+		border: 1px solid var(--color-hairline);
+		border-radius: 999px;
+		font-size: var(--step--1);
+		color: var(--color-ink);
 	}
 
 	.event-card__note {

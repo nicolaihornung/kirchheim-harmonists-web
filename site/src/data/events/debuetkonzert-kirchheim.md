@@ -5,7 +5,11 @@ receptionTime: "18:00"
 startTime: "18:45"
 venue: "Pfarrsaal St. Andreas"
 city: "Kirchheim"
-guests: "Chor Impuls Heimstetten"
+ensembles:
+  - name: "Kirchheim Harmonists"
+    logo: "/ensembles/kirchheim-harmonists.svg"
+  - name: "Chor Impuls Heimstetten"
+    logo: "/ensembles/chor-impuls-heimstetten.svg"
 admission: "Eintritt frei"
 ---
 

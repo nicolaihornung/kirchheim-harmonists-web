@@ -11,7 +11,10 @@ const events = defineCollection({
 		startTime: z.string(),
 		venue: z.string(),
 		city: z.string(),
-		guests: z.string().optional(),
+		ensembles: z.array(z.object({
+			name: z.string(),
+			logo: z.string().optional(),
+		})).default([]),
 		admission: z.string().default('Eintritt frei'),
 	}),
 });
