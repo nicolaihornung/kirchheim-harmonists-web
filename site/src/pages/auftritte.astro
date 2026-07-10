@@ -75,8 +75,6 @@ const pastRendered = await Promise.all(
 																<img
 																	src={ensemble.logo}
 																	alt=""
-																	width="120"
-																	height="60"
 																	class="ensemble__logo"
 																/>
 																<figcaption class="ensemble__name">{ensemble.name}</figcaption>
@@ -141,8 +139,6 @@ const pastRendered = await Promise.all(
 																<img
 																	src={ensemble.logo}
 																	alt=""
-																	width="120"
-																	height="60"
 																	class="ensemble__logo"
 																/>
 																<figcaption class="ensemble__name">{ensemble.name}</figcaption>
@@ -262,8 +258,17 @@ const pastRendered = await Promise.all(
 	}
 
 	.ensemble__logo {
-		max-height: 48px;
+		display: block;
+		box-sizing: content-box;
+		height: 40px;
 		width: auto;
+		max-width: 100%;
+		/* JPEG logos aren't transparent; a white tile unifies their
+		   differing backgrounds until transparent SVGs arrive. */
+		background: #ffffff;
+		padding: var(--space-2xs) var(--space-xs);
+		border: 1px solid var(--color-hairline);
+		border-radius: 6px;
 	}
 
 	.ensemble__name {

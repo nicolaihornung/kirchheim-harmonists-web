@@ -7,9 +7,9 @@ venue: "Pfarrsaal St. Andreas"
 city: "Kirchheim"
 ensembles:
   - name: "Kirchheim Harmonists"
-    logo: "/ensembles/kirchheim-harmonists.svg"
+    logo: "/ensembles/kirchheim-harmonists.jpg"
   - name: "Chor Impuls Heimstetten"
-    logo: "/ensembles/chor-impuls-heimstetten.svg"
+    logo: "/ensembles/chor-impuls-heimstetten.jpg"
 admission: "Eintritt frei"
 ---
 

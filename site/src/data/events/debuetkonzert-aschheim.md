@@ -7,9 +7,9 @@ venue: "Pfarrsaal St. Peter und Paul"
 city: "Aschheim"
 ensembles:
   - name: "Kirchheim Harmonists"
-    logo: "/ensembles/kirchheim-harmonists.svg"
+    logo: "/ensembles/kirchheim-harmonists.jpg"
   - name: "TUNE It"
-    logo: "/ensembles/tune-it.svg"
+    logo: "/ensembles/tune-it.jpg"
 admission: "Eintritt frei"
 ---
 
