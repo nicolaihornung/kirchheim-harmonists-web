@@ -1,0 +1,13 @@
+# Copy this file to `backend.hcl` (git-ignored) and fill in your values, then:
+#   terraform init -backend-config=backend.hcl
+#
+# The R2 access key id / secret are NOT set here — provide them via env vars:
+#   export AWS_ACCESS_KEY_ID=<your R2 access key id>
+#   export AWS_SECRET_ACCESS_KEY=<your R2 secret access key>
+
+bucket = "kirchheim-harmonists-tfstate"
+key    = "infra/terraform.tfstate"
+
+endpoints = {
+  s3 = "https://<YOUR_ACCOUNT_ID>.r2.cloudflarestorage.com"
+}

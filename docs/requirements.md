@@ -75,9 +75,10 @@ Terraform.
   against live docs — most online examples are stale v4).
 - **State backend:** Cloudflare R2 via the `s3` backend with `use_lockfile = true`
   (Terraform ≥ 1.10; no DynamoDB). Bootstrap bucket + token created once by hand.
-- **Manages:** DNS records; Email Routing settings, verified destination addresses,
-  and the routing rule sending `info@` to the fan-out Worker; the Worker's custom
-  domain / route for the site; the state-bucket config.
+- **Manages:** DNS records (incl. email-related MX/SPF); Email Routing settings, verified
+  destination addresses, and the routing rule sending `info@` to the fan-out Worker; the
+  state-bucket config. (The site Worker + its custom domain are owned by wrangler/CI — see
+  boundary below.)
 - **IaC/app boundary:** Terraform owns *infrastructure that exists*; wrangler/build
   owns *code that deploys* (the site, and the Email Worker's code). The fan-out Worker
   is a small grey area — decide at build time whether TF or wrangler owns the script,

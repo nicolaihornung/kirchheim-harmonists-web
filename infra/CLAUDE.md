@@ -28,14 +28,19 @@ Manages all Cloudflare infrastructure for `kirchheim-harmonists.de`.
 - DNS records for the site and email routing.
 - Email Routing: settings, destination addresses, and the rule pointing `info@` at the
   fan-out Worker (the `cloudflare_email_routing_*` family — verify exact names/args).
-- The Worker (custom domain / route) serving the site's static assets.
+- (The site Worker, its custom domain, and static assets are deployed by wrangler/CI —
+  **not** Terraform. See the boundary note below.)
 - Optionally the Email Worker script itself — but see the boundary note below.
 
 ## IaC/app boundary
-- **Terraform owns:** DNS, Email Routing settings/addresses/rules, the Worker's custom
-  domain / route for the site, R2 state-bucket config, API-token-scoped configuration.
-- **wrangler/build owns:** the site build deployed to the Worker, and the Email Worker
-  *code*.
+- **Terraform owns:** DNS (incl. email-related records), Email Routing settings/addresses/
+  rules, R2 state-bucket config, API-token-scoped configuration.
+- **wrangler/build owns:** the site Worker — its script, static assets, **and its custom
+  domain** (declared in `wrangler.jsonc`, deployed via GitHub Actions) — plus the Email
+  Worker *code*.
+- **Decision (site domain): Option A.** The site's custom domain is deploy-coupled, so
+  wrangler owns it; Cloudflare then auto-manages the apex DNS record for that domain.
+  Terraform therefore does *not* manage the site route.
 - **Grey area:** the fan-out Worker is tiny. Deploying its code via `wrangler` and
   having TF only wire the routing rule keeps the boundary clean; managing it via a
   `cloudflare_workers_script` resource is defensible for one small script. Decide at

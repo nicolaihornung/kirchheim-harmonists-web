@@ -1,0 +1,13 @@
+# Local backend config & secrets — never commit
+backend.hcl
+*.tfvars
+*.auto.tfvars
+
+# Terraform working directory & state (state lives in R2, not here)
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# Note: .terraform.lock.hcl IS committed on purpose (pins provider versions).
