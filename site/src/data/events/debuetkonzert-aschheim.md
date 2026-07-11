@@ -8,10 +8,10 @@ city: "Aschheim"
 ensembles:
   - name: "Kirchheim Harmonists"
     logo: "/ensembles/kirchheim-harmonists.jpg"
-  - name: "TUNE It"
+  - name: "TUNEIt"
     logo: "/ensembles/tune-it.jpg"
 admission: "Eintritt frei"
 ---
 
 <!-- PLACEHOLDER: optional programme note -->
-Unser allererstes Konzert – gemeinsam mit dem Gastchor TUNE It.
+Unser allererstes Konzert – gemeinsam mit der Band TUNEIt.
