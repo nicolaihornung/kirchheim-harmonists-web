@@ -5,7 +5,8 @@
 	"name": "kirchheim-harmonists-site",
 	"compatibility_date": "2026-07-11",
 	"assets": {
-		"directory": "./dist"
+		"directory": "./dist",
+		"not_found_handling": "404-page"
 	},
 	"routes": [
 		{ "pattern": "kirchheim-harmonists.de", "custom_domain": true },

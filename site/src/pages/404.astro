@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Seite nicht gefunden" description="Diese Seite wurde nicht gefunden.">
+	<section class="notfound">
+		<div class="container">
+			<p class="eyebrow">Fehler 404</p>
+			<h1>Seite nicht gefunden</h1>
+			<p>
+				Diese Seite gibt es leider nicht (mehr). Zur&uuml;ck zur{' '}
+				<a href="/">Startseite</a> oder zu unseren{' '}
+				<a href="/auftritte">Auftritten</a>.
+			</p>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.notfound {
+		padding-block: var(--space-3xl) var(--space-2xl);
+	}
+
+	.notfound h1 {
+		margin-block: var(--space-s) var(--space-m);
+	}
+</style>
