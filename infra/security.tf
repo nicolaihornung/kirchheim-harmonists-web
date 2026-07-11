@@ -22,3 +22,43 @@ resource "cloudflare_zone_setting" "min_tls_version" {
   setting_id = "min_tls_version"
   value      = "1.2"
 }
+
+# --- Certificate issuance restriction (CAA) -------------------------------
+# Restrict which CAs may issue certificates for this domain to the ones
+# Cloudflare uses for Universal SSL (values verified against Cloudflare's
+# "Certificate authorities" docs). This blocks certificate mis-issuance by any
+# other CA.
+#
+# Safe by design: with Universal SSL on, Cloudflare automatically adds CAA
+# records for any CA it still needs once a CAA record exists, so this cannot
+# lock Cloudflare out of issuing/renewing — it only shuts out third-party CAs.
+# `issue` covers leaf certs; `issuewild` the wildcard (*.domain) cert. CAA at
+# the apex is inherited by all subdomains, so one set here covers www etc.
+locals {
+  caa_issuers = [
+    "letsencrypt.org",                    # Let's Encrypt
+    "pki.goog; cansignhttpexchanges=yes", # Google Trust Services
+    "ssl.com",                            # SSL.com
+    "sectigo.com",                        # Sectigo (backup certificates)
+  ]
+
+  caa_records = merge(
+    { for ca in local.caa_issuers : "issue::${ca}" => { tag = "issue", value = ca } },
+    { for ca in local.caa_issuers : "issuewild::${ca}" => { tag = "issuewild", value = ca } },
+  )
+}
+
+resource "cloudflare_dns_record" "caa" {
+  for_each = local.caa_records
+
+  zone_id = var.zone_id
+  name    = "kirchheim-harmonists.de"
+  type    = "CAA"
+  ttl     = 1 # automatic
+
+  data = {
+    flags = 0
+    tag   = each.value.tag
+    value = each.value.value
+  }
+}
