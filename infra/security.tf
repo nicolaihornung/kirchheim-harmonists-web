@@ -1,18 +1,14 @@
 # Security hardening (applies at launch, alongside the rest of the infra).
 
 # --- Email anti-spoofing --------------------------------------------------
-# The domain forwards (receives) mail but does not *send* as itself, so a DMARC
-# reject policy tells receivers to drop anything spoofing @kirchheim-harmonists.de.
-# SPF is managed by cloudflare_email_routing_dns (see email.tf) — do not add a
-# second SPF record here. Revisit alignment (SPF/DKIM) if we ever send mail as
-# this domain (e.g. a Phase 2 newsletter).
-resource "cloudflare_dns_record" "dmarc" {
-  zone_id = var.zone_id
-  name    = "_dmarc"
-  type    = "TXT"
-  content = "v=DMARC1; p=reject; adkim=s; aspf=s"
-  ttl     = 1 # automatic
-}
+# DMARC is NOT managed here. Cloudflare's "DMARC Management" feature already
+# publishes the `_dmarc` record (p=reject) AND processes aggregate reports
+# (rua=mailto:dmarc-reports@kirchheim-harmonists.de) in the dashboard. A DMARC
+# record managed here too would be a *second* _dmarc record, and per RFC 7489
+# §6.6.3 multiple DMARC records make receivers ignore DMARC entirely — so we
+# deliberately let Cloudflare own it and do not add one. Revisit alignment
+# (SPF/DKIM) if we ever send mail as this domain (e.g. a Phase 2 newsletter).
+# SPF is managed by cloudflare_email_routing_dns (see email.tf).
 
 # --- HTTPS / TLS hardening (zone-wide) ------------------------------------
 resource "cloudflare_zone_setting" "always_use_https" {
