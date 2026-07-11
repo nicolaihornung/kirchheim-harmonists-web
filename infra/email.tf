@@ -5,10 +5,13 @@
 #   1. The email Worker must already be deployed (wrangler, see
 #      workers/email-router/) before `terraform apply` runs the rule below —
 #      cloudflare_email_routing_rule targets it by name and the Worker must exist.
-#   2. Each address in cloudflare_email_routing_address must be verified by its
-#      owner (they receive a confirmation email with a link to click). Forwarding
-#      to an address silently fails until it is verified — Terraform cannot do
-#      this step; it's human-in-the-loop.
+#   2. The destination address(es) info@ fans out to are created and verified
+#      by hand in the dashboard (Email Routing → Destination addresses), NOT by
+#      Terraform: the account-scoped "Email Routing Addresses" permission isn't
+#      available in the current custom-token editor, and verification (clicking
+#      the confirmation link) was always a human-in-the-loop step regardless.
+#      The Worker learns the recipients from its FORWARD_TO secret (wrangler),
+#      so Terraform doesn't need them either.
 
 # Turns on Email Routing for the zone. `enabled` is computed by the provider —
 # do not set it here.
@@ -19,15 +22,6 @@ resource "cloudflare_email_routing_settings" "this" {
 # Creates the MX and SPF DNS records Email Routing needs.
 resource "cloudflare_email_routing_dns" "this" {
   zone_id = var.zone_id
-}
-
-# One destination address per recipient. Each must be verified by its owner
-# before mail actually reaches them.
-resource "cloudflare_email_routing_address" "recipients" {
-  for_each = toset(var.forward_recipients)
-
-  account_id = var.account_id
-  email      = each.value
 }
 
 # Routes info@ to the fan-out Worker, which forwards to the recipients above
@@ -50,6 +44,5 @@ resource "cloudflare_email_routing_rule" "info_fanout" {
 
   depends_on = [
     cloudflare_email_routing_settings.this,
-    cloudflare_email_routing_address.recipients,
   ]
 }

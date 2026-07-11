@@ -13,9 +13,3 @@ variable "email_worker_name" {
   description = "Name of the deployed email fan-out Worker"
   default     = "kirchheim-harmonists-email-router"
 }
-
-variable "forward_recipients" {
-  type        = list(string)
-  description = "Verified destination inboxes info@ fans out to (kept out of git)"
-  default     = []
-}
