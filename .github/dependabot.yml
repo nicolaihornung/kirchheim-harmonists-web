@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # Site dependencies (Astro, Fontsource, wrangler, …)
+  - package-ecosystem: "npm"
+    directory: "/site"
+    schedule:
+      interval: "weekly"
+
+  # Email fan-out Worker dependencies
+  - package-ecosystem: "npm"
+    directory: "/workers/email-router"
+    schedule:
+      interval: "weekly"
+
+  # Keep the SHA-pinned GitHub Actions current (Dependabot bumps the pins)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
