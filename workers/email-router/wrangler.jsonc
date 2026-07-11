@@ -3,5 +3,11 @@
 	// no bindings needed. Recipients come from the FORWARD_TO secret (see README.md).
 	"name": "kirchheim-harmonists-email-router",
 	"main": "src/index.ts",
-	"compatibility_date": "2026-07-11"
+	"compatibility_date": "2026-07-11",
+
+	// Workers Logs: capture invocations + errors (e.g. a failed forward) so email
+	// routing is observable in the Cloudflare dashboard. Free-tier included.
+	"observability": {
+		"enabled": true
+	}
 }
