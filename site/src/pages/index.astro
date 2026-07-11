@@ -5,42 +5,49 @@ import Email from '../components/Email.astro';
 
 <Layout
 	title="Startseite"
-	description="Die Kirchheim Harmonists sind ein Chor aus Kirchheim. Erfahren Sie mehr über unsere Geschichte, unser Repertoire und wie Sie uns erreichen."
+	description="Die Kirchheim Harmonists sind ein junges A-cappella-Ensemble aus Kirchheim: zehn bis sechzehn Stimmen, anspruchsvolle Chormusik ohne Instrumente. Interessierte Sängerinnen und Sänger sind zum Probesingen willkommen."
 >
 	<section class="hero">
 		<div class="container hero__inner">
-			<!-- PLACEHOLDER: real copy to come -->
-			<p class="eyebrow">Chorgesang in Kirchheim</p>
+			<p class="eyebrow">Junges A-cappella-Ensemble aus Kirchheim</p>
 			<h1 class="hero__headline">Kirchheim Harmonists</h1>
 			<p class="hero__intro">
-				Wir sind ein gemischter Chor, der Menschen mit Freude am gemeinsamen Singen
-				zusammenbringt &mdash; von klassischen Chorsätzen bis zu zeitgenössischen
-				Arrangements.
+				Zehn bis sechzehn Stimmen mit einem gemeinsamen Anspruch: ein klarer, feiner
+				Klang &mdash; ganz ohne Instrumente. Wir erarbeiten anspruchsvolle
+				A-cappella-Literatur mit Sorgfalt und Hingabe.
 			</p>
-			<Email class="hero__cta" label="Kontakt aufnehmen" />
+			<Email class="hero__cta" label="Probesingen anfragen" />
 		</div>
 	</section>
 
 	<section class="about">
 		<div class="container">
 			<h2>Über uns</h2>
-			<!-- PLACEHOLDER: real copy to come -->
 			<p>
-				Die Kirchheim Harmonists wurden von einer kleinen Gruppe sangesfreudiger
-				Nachbarinnen und Nachbarn gegründet, die sich regelmäßig zum gemeinsamen Singen
-				trafen. Aus diesen zwanglosen Treffen ist über die Jahre ein fester Chor
-				geworden, der die musikalische Landschaft der Gemeinde bereichert.
+				Die Kirchheim Harmonists sind ein kleines, gemischtes Ensemble von zehn bis
+				sechzehn Sängerinnen und Sängern. Wir sind altersgemischt, die meisten von uns
+				sind unter 35. Viele haben zusammen im Schulchor &bdquo;Kammerchor Cantus ad
+				Libitum&ldquo; gesungen, aus dem das Ensemble hervorgegangen ist.
 			</p>
 			<p>
-				Unser Repertoire reicht von mehrstimmigen Volksliedern über geistliche Chormusik
-				bis hin zu Arrangements aus Pop und Jazz. Wir legen Wert auf einen warmen,
-				ausgewogenen Klang und darauf, dass jede Stimme &mdash; ob erfahren oder neu im
-				Chorgesang &mdash; ihren Platz findet.
+				Wir singen ausschlie&szlig;lich a cappella. Was uns verbindet, ist der Anspruch
+				an einen feinen, differenzierten Chorklang und die Freude daran, anspruchsvolle
+				Literatur mit Genauigkeit und Ausdauer zu erarbeiten.
+			</p>
+		</div>
+	</section>
+
+	<section class="join">
+		<div class="container">
+			<h2>Mitsingen</h2>
+			<p>
+				Wir proben w&ouml;chentlich donnerstags um 19:30 Uhr im Turmzimmer von St. Peter
+				in Heimstetten.
 			</p>
 			<p>
-				Geprobt wird wöchentlich am Abend in den Räumen der Gemeinde. Neue Sängerinnen
-				und Sänger aller Stimmlagen sind jederzeit herzlich willkommen, bei einer
-				Probe hereinzuschnuppern.
+				Wer Freude an anspruchsvoller A-cappella-Musik hat und ein ambitioniertes
+				Ensemble sucht, ist herzlich zu einem Probesingen eingeladen. Am besten vorab
+				kurz melden &mdash; wir freuen uns &uuml;ber eine Nachricht an <Email />.
 			</p>
 		</div>
 	</section>
@@ -71,20 +78,24 @@ import Email from '../components/Email.astro';
 		font-weight: 600;
 	}
 
-	.about {
+	.about,
+	.join {
 		padding-block: var(--space-2xl);
 		border-top: 1px solid var(--color-hairline);
 	}
 
-	.about h2 {
+	.about h2,
+	.join h2 {
 		margin-bottom: var(--space-l);
 	}
 
-	.about p {
+	.about p,
+	.join p {
 		margin-bottom: var(--space-m);
 	}
 
-	.about p:last-child {
+	.about p:last-child,
+	.join p:last-child {
 		margin-bottom: 0;
 	}
 </style>
