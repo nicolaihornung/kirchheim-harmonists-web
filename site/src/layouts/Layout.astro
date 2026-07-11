@@ -64,20 +64,7 @@ const year = new Date().getFullYear();
 			</div>
 		</footer>
 
-		<script>
-			// Decode obfuscated <Email /> spans into real mailto: links on load.
-			for (const el of document.querySelectorAll('.js-email')) {
-				const enc = el.getAttribute('data-e');
-				if (!enc) continue;
-				const address = atob(enc);
-				const a = document.createElement('a');
-				a.href = 'mailto:' + address;
-				a.textContent = el.getAttribute('data-label') || address;
-				const rest = el.className.replace('js-email', '').trim();
-				if (rest) a.className = rest;
-				el.replaceWith(a);
-			}
-		</script>
+		<script src="/email-decode.js" defer></script>
 	</body>
 </html>
 
