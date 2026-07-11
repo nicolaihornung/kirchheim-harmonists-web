@@ -1,0 +1,19 @@
+---
+// Obfuscated info@ address. The literal address (and any user@domain pattern)
+// never appears in the static HTML — it's base64-encoded in a data attribute and
+// decoded into a real `mailto:` link by the small script in Layout.astro on load.
+// This defeats bulk regex email scrapers. Before/without JS, a readable but
+// un-scrapable fallback ("info [ät] … [punkt] de") is shown, so no dead links.
+interface Props {
+	label?: string;
+	class?: string;
+}
+
+const { label, class: className } = Astro.props;
+
+const address = 'info@kirchheim-harmonists.de';
+const encoded = btoa(address);
+const human = address.replace('@', ' [ät] ').replaceAll('.', ' [punkt] ');
+---
+
+<span class:list={['js-email', className]} data-e={encoded} data-label={label}>{human}</span>

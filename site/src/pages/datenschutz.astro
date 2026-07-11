@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Email from '../components/Email.astro';
 ---
 
 <Layout
@@ -19,9 +20,7 @@ import Layout from '../layouts/Layout.astro';
 				Nicolai Hornung<br />
 				Hauptstraße 45c<br />
 				85551 Kirchheim bei München<br />
-				E-Mail: <a href="mailto:info@kirchheim-harmonists.de"
-					>info@kirchheim-harmonists.de</a
-				>
+				E-Mail: <Email />
 			</p>
 
 			<h2>2. Allgemeines zur Datenverarbeitung</h2>
@@ -61,9 +60,8 @@ import Layout from '../layouts/Layout.astro';
 
 			<h2>4. Kontaktaufnahme per E-Mail</h2>
 			<p>
-				Wenn Sie uns per E-Mail (z. B. an <a
-					href="mailto:info@kirchheim-harmonists.de">info@kirchheim-harmonists.de</a
-				>) kontaktieren, verarbeiten wir Ihre Angaben (Ihre E-Mail-Adresse sowie den
+				Wenn Sie uns per E-Mail (z. B. an <Email />) kontaktieren, verarbeiten wir Ihre
+				Angaben (Ihre E-Mail-Adresse sowie den
 				Inhalt Ihrer Nachricht) ausschließlich zur Bearbeitung Ihrer Anfrage.
 			</p>
 			<p>
